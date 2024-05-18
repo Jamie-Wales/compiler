@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/Users/jamie/Dev/personal/c/astGenerator/cmake-build-debug",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/jamie/Dev/personal/c/astGenerator/include -g -std=gnu17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -Wall -Wextra -Wpedantic -o CMakeFiles/astGenerator.dir/src/Token.c.o -c /Users/jamie/Dev/personal/c/astGenerator/src/Token.c",
+  "file": "/Users/jamie/Dev/personal/c/astGenerator/src/Token.c",
+  "output": "CMakeFiles/astGenerator.dir/src/Token.c.o"
+},
+{
+  "directory": "/Users/jamie/Dev/personal/c/astGenerator/cmake-build-debug",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/jamie/Dev/personal/c/astGenerator/include -g -std=gnu17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -Wall -Wextra -Wpedantic -o CMakeFiles/astGenerator.dir/src/main.c.o -c /Users/jamie/Dev/personal/c/astGenerator/src/main.c",
+  "file": "/Users/jamie/Dev/personal/c/astGenerator/src/main.c",
+  "output": "CMakeFiles/astGenerator.dir/src/main.c.o"
+},
+{
+  "directory": "/Users/jamie/Dev/personal/c/astGenerator/cmake-build-debug",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/jamie/Dev/personal/c/astGenerator/include -g -std=gnu17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -Wall -Wextra -Wpedantic -o CMakeFiles/astGenerator.dir/src/scanner.c.o -c /Users/jamie/Dev/personal/c/astGenerator/src/scanner.c",
+  "file": "/Users/jamie/Dev/personal/c/astGenerator/src/scanner.c",
+  "output": "CMakeFiles/astGenerator.dir/src/scanner.c.o"
+},
+{
+  "directory": "/Users/jamie/Dev/personal/c/astGenerator/cmake-build-debug",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/jamie/Dev/personal/c/astGenerator/include -g -std=gnu17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -Wall -Wextra -Wpedantic -o CMakeFiles/astGenerator.dir/src/utils.c.o -c /Users/jamie/Dev/personal/c/astGenerator/src/utils.c",
+  "file": "/Users/jamie/Dev/personal/c/astGenerator/src/utils.c",
+  "output": "CMakeFiles/astGenerator.dir/src/utils.c.o"
+}
+]
