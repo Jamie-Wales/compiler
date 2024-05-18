@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/cc -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/astGenerator.dir/src/Token.c.o CMakeFiles/astGenerator.dir/src/main.c.o CMakeFiles/astGenerator.dir/src/scanner.c.o CMakeFiles/astGenerator.dir/src/utils.c.o -o astGenerator 
