@@ -39,6 +39,8 @@ int test_file(const char* file)
         case S_IFIFO:
             error = "FIFO";
             break;
+        default:;
+            break;
         }
         errorf("Error on file %s, filetype is %s \n", file, error);
         return -1;

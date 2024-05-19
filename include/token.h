@@ -1,5 +1,5 @@
-#ifndef INCLUDE_TOKEN_H_
-#define INCLUDE_TOKEN_H_
+#ifndef INCLUDE_TOKEN_H
+#define INCLUDE_TOKEN_H
 #include <sys/_types/_size_t.h>
 
 
@@ -65,5 +65,6 @@ typedef struct Tokenlist {
 
 void insert(Tokenlist *tokenlist, const Token *token);
 void init_tokenlist(Tokenlist *tokenlist, size_t initial);
-
+void token_printer(const Tokenlist* list);
+char* type_convert(const enum TokenType type);
 #endif
