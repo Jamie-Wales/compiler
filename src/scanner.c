@@ -96,7 +96,7 @@ char scanner_current(const Scanner *scanner) {
 }
 
 static int cmp(Scanner *scanner, int num, char *comparision) {
-    char comparator[num];  // Use stack allocation to avoid memory leaks
+    char comparator[num];
     memcpy(comparator, scanner->buffer + scanner->index, num);
     return strncmp(comparator, comparision, num);
 }
@@ -105,7 +105,7 @@ static int cmp(Scanner *scanner, int num, char *comparision) {
 static void process_keywords(Scanner *scanner, Tokenlist *list) {
     switch (scanner_current(scanner)) {
         case 'f': {
-            if (cmp(scanner, 3, "for") == 0) {
+            if (cmp(scanner, 3, "for") == 0 && !isalpha(scanner->buffer[scanner->index + 3])) {
                 Token *token = malloc(sizeof(*token));
                 if (token == NULL) {
                     errorf("cannot allocate memory");
@@ -115,9 +115,28 @@ static void process_keywords(Scanner *scanner, Tokenlist *list) {
                 scanner->index += 3;
                 insert(list, token);
                 memset(scanner->current_token, 0, strlen(scanner->current_token + 1));
+            } else if (cmp(scanner, 5, "false") == 0) {
+                Token *token = malloc(sizeof(*token));
+                if (token == NULL) {
+                    errorf("cannot allocate memory");
+                }
+                token->lexeme = strdup("false");
+                token->type = FALSE;
+                scanner->index += 5;
+                insert(list, token);
+                memset(scanner->current_token, 0, strlen(scanner->current_token + 1));
+            } else {
+                while (isalnum(scanner->buffer[scanner->index]) && scanner->index != scanner->size) {
+                    scanner_advance(scanner);
+                }
+                Token *token = malloc(sizeof(Token));
+                token->type = IDENTIFIER;
+                token->lexeme = strdup(scanner->current_token);
+                insert(list, token);
+                memset(scanner->current_token, 0, strlen(scanner->current_token + 1));
             }
-            break;
         }
+        break;
     }
 }
 

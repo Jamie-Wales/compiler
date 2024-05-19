@@ -30,6 +30,8 @@ enum TokenType {
     BANG,
     BANG_EQUAL,
     EQUAL_EQUAL,
+    TRUE,
+    FALSE,
 
     /* ---- KEYWORDS ---- */
     FOR,
@@ -39,7 +41,7 @@ enum TokenType {
     VAR,
     RETURN,
     THIS,
-
+    FUNCTION,
 
     /* ---- TYPES ----*/
     INTEGER,
@@ -48,6 +50,7 @@ enum TokenType {
     FLOAT,
     DOUBLE,
     STRING,
+    IDENTIFIER,
 
     EOF,
 };
@@ -58,13 +61,16 @@ typedef struct Token {
 } Token;
 
 typedef struct Tokenlist {
-    Token* tokens;
+    Token *tokens;
     size_t count;
     size_t capacity;
 } Tokenlist;
 
 void insert(Tokenlist *tokenlist, const Token *token);
+
 void init_tokenlist(Tokenlist *tokenlist, size_t initial);
-void token_printer(const Tokenlist* list);
-char* type_convert(const enum TokenType type);
+
+void token_printer(const Tokenlist *list);
+
+char *type_convert(const enum TokenType type);
 #endif

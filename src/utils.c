@@ -9,8 +9,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-int test_file(const char* file)
-{
+int test_file(const char *file) {
     struct stat st;
     if (lstat(file, &st) != 0) {
         fprintf(stderr, "lstat failure\n");
@@ -19,28 +18,28 @@ int test_file(const char* file)
     }
 
     if (S_IFREG != (st.st_mode & S_IFMT)) {
-        char* error = "";
+        char *error = "";
         switch (st.st_mode & S_IFMT) {
-        case S_IFSOCK:
-            error = "socket";
-            break;
-        case S_IFLNK:
-            error = "sym link";
-            break;
-        case S_IFBLK:
-            error = "block device";
-            break;
-        case S_IFDIR:
-            error = "directory";
-            break;
-        case S_IFCHR:
-            error = "character device";
-            break;
-        case S_IFIFO:
-            error = "FIFO";
-            break;
-        default:;
-            break;
+            case S_IFSOCK:
+                error = "socket";
+                break;
+            case S_IFLNK:
+                error = "sym link";
+                break;
+            case S_IFBLK:
+                error = "block device";
+                break;
+            case S_IFDIR:
+                error = "directory";
+                break;
+            case S_IFCHR:
+                error = "character device";
+                break;
+            case S_IFIFO:
+                error = "FIFO";
+                break;
+            default: ;
+                break;
         }
         errorf("Error on file %s, filetype is %s \n", file, error);
         return -1;
@@ -49,8 +48,7 @@ int test_file(const char* file)
     return 0;
 }
 
-void errorf(const char* format, ...)
-{
+void errorf(const char *format, ...) {
     int errnum = errno;
     va_list ap;
     va_start(ap, format);

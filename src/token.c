@@ -24,6 +24,8 @@ void insert(Tokenlist *tokenlist, const Token *token) {
 
 char *type_convert(const enum TokenType type) {
     switch (type) {
+        case IDENTIFIER:
+            return "identifier";
         case LEFT_PEREN:
             break;
         case RIGHT_PEREN:
@@ -94,11 +96,15 @@ char *type_convert(const enum TokenType type) {
             return "double";
         case STRING:
             return "string";
+        case TRUE:
+            return "true";
+        case FALSE:
+            return "false";
         case EOF:
             break;
+        default: ;
     }
 }
-
 
 void token_printer(const Tokenlist *list) {
     for (size_t i = 0; i < list->count; i++) {
