@@ -8,10 +8,10 @@ void init_tokenlist(Tokenlist *tokenlist, size_t initial) {
     tokenlist->tokens = malloc(sizeof(Token) * initial);
 }
 
-void insert(Tokenlist *tokenlist, const Token* token) {
+void insert(Tokenlist *tokenlist, const Token *token) {
     if (tokenlist->capacity == tokenlist->count) {
         tokenlist->capacity *= 2;
-        Token* temp = realloc(tokenlist->tokens, sizeof(Token) * tokenlist->capacity);
+        Token *temp = realloc(tokenlist->tokens, sizeof(Token) * tokenlist->capacity);
         if (temp == NULL) {
             fprintf(stderr, "Cannot allocate memory");
             exit(EXIT_FAILURE);
@@ -22,7 +22,7 @@ void insert(Tokenlist *tokenlist, const Token* token) {
     tokenlist->tokens[tokenlist->count++] = *token;
 }
 
-char* type_convert(const enum TokenType type) {
+char *type_convert(const enum TokenType type) {
     switch (type) {
         case LEFT_PEREN:
             break;
@@ -67,7 +67,7 @@ char* type_convert(const enum TokenType type) {
         case EQUAL_EQUAL:
             break;
         case FOR:
-            break;
+            return "for";
         case WHILE:
             break;
         case SUPER:
@@ -97,12 +97,11 @@ char* type_convert(const enum TokenType type) {
         case EOF:
             break;
     }
-
 }
 
 
-void token_printer(const Tokenlist* list) {
-   for (size_t i = 0; i < list->count; i++) {
-      printf("%s, %s\n", list->tokens[i].lexeme, type_convert(list->tokens[i].type));
-   }
+void token_printer(const Tokenlist *list) {
+    for (size_t i = 0; i < list->count; i++) {
+        printf("%s, %s\n", list->tokens[i].lexeme, type_convert(list->tokens[i].type));
+    }
 }

@@ -39,6 +39,7 @@ static void scanner_advance(Scanner *scanner) {
         const int position = strlen(scanner->current_token);
         scanner->current_token[position] = scanner->buffer[scanner->index];
         scanner->index++;
+        scanner->current_token[position + 1] = '\0';
     }
 }
 
@@ -59,20 +60,13 @@ static void process_number(Scanner *scanner, Tokenlist *tok) {
         }
     }
 
-    int position = strlen(scanner->current_token);
     if (scanner_current(scanner) == 'f') {
-        scanner->current_token[position] = 'f';
-        position++;
+        scanner_advance(scanner);
         doub = false;
     }
 
-    scanner->current_token[position] = '\0';
     Token *token = malloc(sizeof(Token));
-    if (token == NULL) {
-        errorf("Cannot allocate token");
-    }
-    token->lexeme = malloc(sizeof(scanner->current_token));
-    memcpy(token->lexeme, scanner->current_token, position);
+    token->lexeme = strdup(scanner->current_token);
     if (fpn) {
         if (doub) {
             token->type = DOUBLE;
@@ -83,7 +77,7 @@ static void process_number(Scanner *scanner, Tokenlist *tok) {
         token->type = INTEGER;
     }
     insert(tok, token);
-    scanner->current_token = malloc(sizeof(char *) * strlen(scanner->buffer) - scanner->index);
+    memset(scanner->current_token, 0, strlen(scanner->current_token + 1));
 }
 
 
@@ -101,10 +95,39 @@ char scanner_current(const Scanner *scanner) {
     return scanner->buffer[scanner->index];
 }
 
+static int cmp(Scanner *scanner, int num, char *comparision) {
+    char comparator[num];  // Use stack allocation to avoid memory leaks
+    memcpy(comparator, scanner->buffer + scanner->index, num);
+    return strncmp(comparator, comparision, num);
+}
+
+
+static void process_keywords(Scanner *scanner, Tokenlist *list) {
+    switch (scanner_current(scanner)) {
+        case 'f': {
+            if (cmp(scanner, 3, "for") == 0) {
+                Token *token = malloc(sizeof(*token));
+                if (token == NULL) {
+                    errorf("cannot allocate memory");
+                }
+                token->lexeme = strdup("for");
+                token->type = FOR;
+                scanner->index += 3;
+                insert(list, token);
+                memset(scanner->current_token, 0, strlen(scanner->current_token + 1));
+            }
+            break;
+        }
+    }
+}
+
+
 void scanner_walk(Scanner *scanner, Tokenlist *list) {
     while (scanner_current(scanner)) {
         if (isdigit(scanner_current(scanner))) {
             process_number(scanner, list);
+        } else if (isalpha(scanner_current(scanner))) {
+            process_keywords(scanner, list);
         } else {
             scanner->index++;
         }
@@ -115,8 +138,11 @@ void init_scanner(const char *path, Scanner *scanner) {
     scanner->buffer = string_buffer(path);
     scanner->index = 0;
     scanner->line = 0;
-    scanner->current_token = malloc(sizeof(scanner->buffer));
     scanner->size = strlen(scanner->buffer) + 1;
+    scanner->current_token = malloc(sizeof(char) * strlen(scanner->buffer) + 1);
+    if (scanner->current_token == NULL) {
+        errorf("cannot allocate memory");
+    }
 }
 
 void freebuffer(char *buffer) {
