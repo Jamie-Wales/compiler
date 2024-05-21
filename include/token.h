@@ -2,7 +2,6 @@
 #define INCLUDE_TOKEN_H
 #include <sys/_types/_size_t.h>
 
-
 enum TokenType {
     /* ---- SYNTAX ---- */
     LEFT_PEREN,
@@ -56,21 +55,23 @@ enum TokenType {
 };
 
 typedef struct Token {
-    char *lexeme;
+    char* lexeme;
     enum TokenType type;
 } Token;
 
 typedef struct Tokenlist {
-    Token *tokens;
+    Token* tokens;
     size_t count;
     size_t capacity;
 } Tokenlist;
 
-void insert(Tokenlist *tokenlist, const Token *token);
+void insert(Tokenlist* tokenlist, const Token* token);
 
-void init_tokenlist(Tokenlist *tokenlist, size_t initial);
+void init_tokenlist(Tokenlist* tokenlist, size_t initial);
 
-void token_printer(const Tokenlist *list);
+void token_printer(const Tokenlist* list);
 
-char *type_convert(const enum TokenType type);
+char* type_convert(enum TokenType type);
+
+Token* generate_token(enum TokenType type);
 #endif
