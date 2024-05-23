@@ -8,13 +8,18 @@ enum TokenType {
     RIGHT_PEREN,
     LEFT_BRACE,
     RIGHT_BRACE,
+    SEMI_COLON,
     COMMA,
 
     /* ---- MATHMATICAL OPERATORS ---- */
     MINUS,
+    MINUS_EQUAL,
     PLUS,
+    PLUS_EQUAL,
     SLASH,
+    SLASH_EQUAL,
     STAR,
+    STAR_EQUAL,
     LESS_THAN,
     MORE_THAN,
     MORE_EQUAL,
@@ -35,17 +40,26 @@ enum TokenType {
     /* ---- KEYWORDS ---- */
     FOR,
     WHILE,
+    CLASS,
     SUPER,
     EQUAL,
-    VAR,
+    LET,
+    CONST,
     RETURN,
     THIS,
     FUNCTION,
 
-    /* ---- TYPES ----*/
+
+    INTEGER_L,
+    CHARACTER_L,
+    BOOLEAN_L,
+    FLOAT_L,
+    DOUBLE_L,
+    STRING_L,
+
+    /* ---- TYPES R VALUE ----*/
     INTEGER,
     CHARACTER,
-    BOOLEAN,
     FLOAT,
     DOUBLE,
     STRING,
@@ -66,12 +80,10 @@ typedef struct Tokenlist {
 } Tokenlist;
 
 void insert(Tokenlist* tokenlist, const Token* token);
-
 void init_tokenlist(Tokenlist* tokenlist, size_t initial);
-
 void token_printer(const Tokenlist* list);
-
 char* type_convert(enum TokenType type);
-
 Token* generate_token(enum TokenType type);
+void insert_generated_token(const enum TokenType type, Tokenlist* list);
+void free_token_list(Tokenlist* list);
 #endif
